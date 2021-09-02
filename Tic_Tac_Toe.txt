@@ -1,0 +1,304 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace P_2
+{
+    public partial class Form1 : Form
+    {
+
+        Button[,] btn;
+        int n = 0;
+        int x = 0;
+        int y = 0;
+        int pturn = 0;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void data(object sender,EventArgs e)
+        {
+            if(pturn == 0)
+            {
+                (sender as Button).Text = "X";
+                pturn = 1;
+            }
+            else
+            {
+                (sender as Button).Text = "O";
+                pturn = 0;
+            }
+            checkWinner();
+        }
+
+        public void checkWinner()
+        {
+            int px = 0;
+            int po = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+
+                    if (btn[i, j].Text == ("X"))
+                    {
+                        px += 1;
+                    }
+
+                    if (btn[i, j].Text == ("O"))
+                    {
+                        po += 1;
+                    }
+
+                    if (px == n)
+                    {
+                        MessageBox.Show("X is Winner...");
+
+                        for (int a = 0; a < n; a++)
+                        {
+                            for (int b = 0; b < n; b++)
+                            {
+                                btn[a,b].Enabled = false;
+                            }
+                        }
+
+                        break;
+                    }
+
+                    if (po == n)
+                    {
+                        MessageBox.Show("O is Winner...");
+
+                        for (int x = 0; x < n; x++)
+                        {
+                            for (int y = 0; y < n; y++)
+                            {
+                                btn[x,y].Enabled = false;
+                            }
+                        }
+
+                        break;
+                    }
+
+                }
+                px = 0;
+                po = 0;
+            }
+
+
+            /* ------------------ */
+
+            for (int j = 0; j < n; j++) 
+            {
+                for (int i = 0; i < n; i++)
+                {
+
+                    if (btn[i, j].Text == ("X"))
+                    {
+                        px += 1;
+                    }
+
+                    if (btn[i, j].Text == ("O"))
+                    {
+                        po += 1;
+                    }
+
+                    if (px == n)
+                    {
+                        MessageBox.Show("X is Winner...");
+
+                        for (int a = 0; a < n; a++)
+                        {
+                            for (int b = 0; b < n; b++)
+                            {
+                                btn[a, b].Enabled = false;
+                            }
+                        }
+
+                        break;
+                    }
+
+                    if (po == n)
+                    {
+                        MessageBox.Show("O is Winner...");
+
+                        for (int x = 0; x < n; x++)
+                        {
+                            for (int y = 0; y < n; y++)
+                            {
+                                btn[x, y].Enabled = false;
+                            }
+                        }
+
+                        break;
+                    }
+
+                }
+                px = 0;
+                po = 0;
+            }
+
+            /* ------------------ */
+
+
+            for (int i = 0; i < n; i++)
+            {
+
+                if (btn[i, i].Text == ("X"))
+                {
+                    px += 1;
+                }
+
+                if (btn[i, i].Text == ("O"))
+                {
+                    po += 1;
+                }
+
+                if (px == n)
+                {
+                    MessageBox.Show("X is Winner...");
+
+                    for (int a = 0; a < n; a++)
+                    {
+                        for (int b = 0; b < n; b++)
+                        {
+                            btn[a, b].Enabled = false;
+                        }
+                    }
+
+                    break;
+                }
+
+                if (po == n)
+                {
+                    MessageBox.Show("O is Winner...");
+
+                    for (int x = 0; x < n; x++)
+                    {
+                        for (int y = 0; y < n; y++)
+                        {
+                            btn[x, y].Enabled = false;
+                        }
+                    }
+
+                    break;
+                }
+
+            }
+            px = 0;
+            po = 0;
+
+
+            for (int i = 0; i < n; i++)
+            {
+                int j = n - 1 - i;
+                if (btn[i, j].Text == ("X"))
+                {
+                    px += 1;
+                }
+
+                if (btn[i, j].Text == ("O"))
+                {
+                    po += 1;
+                }
+
+                if (px == n)
+                {
+                    MessageBox.Show("X is Winner...");
+
+                    for (int a = 0; a < n; a++)
+                    {
+                        for (int b = 0; b < n; b++)
+                        {
+                            btn[a, b].Enabled = false;
+                        }
+                    }
+
+                    break;
+                }
+
+                if (po == n)
+                {
+                    MessageBox.Show("O is Winner...");
+
+                    for (int x = 0; x < 3; x++)
+                    {
+                        for (int y = 0; y < 3; y++)
+                        {
+                            btn[x, y].Enabled = false;
+                        }
+                    }
+
+                    break;
+                }
+
+            }
+            px = 0;
+            po = 0;
+
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (textBox1.Text != "")
+            {
+                n = Int32.Parse(textBox1.Text);
+                btn = new Button[n, n];
+
+                for (int i = 0; i < n; i++)
+                {
+                    y = y + 50;
+                    for (int j = 0; j < n; j++)
+                    {
+                        x = x + 50;
+                        btn[i, j] = new Button();
+                        btn[i, j].Height = 50;
+                        btn[i, j].Width = 50;
+                        btn[i, j].Location = new Point(x, y);
+                        btn[i, j].Name = "B" + i + j;
+                        this.Controls.Add(btn[i, j]);
+                        panel1.Controls.Add(btn[i,j]);
+                        btn[i, j].Click += new System.EventHandler(data);
+                    }
+                    x = 0;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Enter Value...");
+            }
+
+           
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            textBox1.Text = "";
+            x = 0;
+            y = 0;
+        }
+    }
+}
